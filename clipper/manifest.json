@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "RUNWAY Clip",
+  "version": "2.0.0",
+  "description": "Clip jobs from anywhere into your RUNWAY pipeline — fit-scored, rankable, one keystroke away.",
+  "permissions": ["storage", "tabs", "scripting", "contextMenus"],
+  "host_permissions": ["<all_urls>"],
+  "action": { "default_popup": "popup.html", "default_title": "RUNWAY Clip" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "background": { "service_worker": "worker.js" },
+  "commands": {
+    "clip-page": { "suggested_key": { "default": "Alt+Shift+J" }, "description": "Clip the current job" },
+    "sync-now": { "suggested_key": { "default": "Alt+Shift+S" }, "description": "Sync clips to RUNWAY" }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.linkedin.com/*", "*://*.indeed.com/*", "*://*.glassdoor.com/*"],
+      "js": ["engine.js", "scrape.js", "content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["<all_urls>", "file:///*"],
+      "js": ["engine.js", "bridge.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

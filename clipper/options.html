@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-theme="noir">
+  <head>
+    <meta charset="utf-8" />
+    <title>RUNWAY Clip — Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      [data-theme="noir"] { --bg: #0b0b0c; --card: #141416; --line: rgba(255,255,255,0.08); --line2: rgba(255,255,255,0.18); --ink: #f6f6f3; --mut: #8b8b86; --dim: #5a5a56; --acc: #c6f24e; --acc-ink: #0b0b0c; }
+      [data-theme="bone"] { --bg: #efece4; --card: #fff; --line: rgba(0,0,0,0.1); --line2: rgba(0,0,0,0.2); --ink: #14130f; --mut: #6f6d64; --dim: #a3a097; --acc: #4b7f00; --acc-ink: #fff; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background: var(--bg); color: var(--ink); font-family: "Space Grotesk", system-ui, sans-serif; min-height: 100vh; transition: background 0.5s, color 0.5s; }
+      .mono { font-family: "JetBrains Mono", monospace; }
+      .wrap { max-width: 620px; margin: 0 auto; padding: 60px 26px 80px; }
+      .word { font-family: "Unbounded"; font-weight: 800; font-size: 44px; letter-spacing: -0.04em; line-height: 0.9; }
+      .word .dot { color: var(--acc); }
+      .tag { font-family: "JetBrains Mono"; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mut); margin-top: 10px; }
+      .sec { margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--line); animation: rise 0.5s cubic-bezier(.22,1,.36,1) both; }
+      @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+      .sec h3 { font-family: "Unbounded"; font-weight: 500; font-size: 15px; letter-spacing: -0.01em; }
+      .sec .d { color: var(--mut); font-size: 13px; margin: 6px 0 16px; line-height: 1.55; max-width: 46ch; }
+      label.mono { display: block; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+      input[type="text"], input[type="url"], textarea, select {
+        width: 100%; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 11px; padding: 13px 15px; font: inherit; font-size: 14px; outline: none; transition: border-color 0.2s; }
+      input:focus, textarea:focus, select:focus { border-color: var(--acc); }
+      textarea { resize: vertical; min-height: 78px; line-height: 1.6; }
+      .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+      .chip { font-family: "JetBrains Mono"; font-size: 11px; padding: 5px 11px; border-radius: 8px; border: 1px solid var(--line2); color: var(--ink); animation: pop 0.3s cubic-bezier(.34,1.56,.34,1) both; }
+      @keyframes pop { from { opacity: 0; transform: scale(0.7); } to { opacity: 1; transform: none; } }
+      .trow { display: flex; align-items: center; gap: 14px; }
+      .sw { position: relative; width: 50px; height: 28px; cursor: pointer; flex: none; }
+      .sw input { display: none; }
+      .tk { position: absolute; inset: 0; border-radius: 99px; border: 1px solid var(--line2); background: transparent; transition: 0.3s; }
+      .tk::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--mut); transition: 0.3s cubic-bezier(.34,1.56,.34,1); }
+      .sw input:checked + .tk { background: var(--acc); border-color: transparent; } .sw input:checked + .tk::after { transform: translateX(22px); background: var(--acc-ink); }
+      .themes { display: flex; gap: 10px; }
+      .tcard { flex: 1; border: 1px solid var(--line); border-radius: 13px; padding: 14px; cursor: pointer; transition: 0.2s; }
+      .tcard.on { border-color: var(--acc); }
+      .tsw { height: 34px; border-radius: 8px; margin-bottom: 9px; }
+      .tcard .n { font-family: "JetBrains Mono"; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; }
+      .bar { position: sticky; bottom: 22px; display: flex; gap: 12px; align-items: center; margin-top: 40px; }
+      .btn { font-family: "Space Grotesk"; font-weight: 700; font-size: 12px; letter-spacing: 0.03em; text-transform: uppercase; padding: 14px 26px; border-radius: 12px; cursor: pointer; border: 1px solid var(--line2); background: transparent; color: var(--ink); transition: transform 0.24s cubic-bezier(.34,1.56,.34,1); }
+      .btn.fill { background: var(--acc); color: var(--acc-ink); border-color: transparent; }
+      .btn:hover { transform: translateY(-2px); } .btn:active { transform: scale(0.96); }
+      .saved { font-family: "JetBrains Mono"; font-size: 12px; color: var(--acc); opacity: 0; transform: translateX(-6px); transition: 0.3s; }
+      .saved.show { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="word">RUNWAY<span class="dot">.</span></div>
+      <div class="tag">Clip · Settings</div>
+
+      <div class="sec">
+        <h3>RUNWAY app URL</h3>
+        <div class="d">Where your RUNWAY app lives — powers “Open RUNWAY”. Leave blank if you only use a local file.</div>
+        <label class="mono">URL</label>
+        <input type="url" id="appUrl" placeholder="https://your-runway-app   or   file:///…/runway.html" />
+      </div>
+
+      <div class="sec">
+        <h3>Skills → fit scoring</h3>
+        <div class="d">Comma-separated. Each clip is scored by how many of these appear in the posting, and it's folded into the note on sync.</div>
+        <label class="mono">Skills</label>
+        <textarea id="skills" placeholder="react, typescript, node.js, postgresql, aws, python, system design"></textarea>
+        <div class="chips" id="chips"></div>
+      </div>
+
+      <div class="sec">
+        <h3>Default stage</h3>
+        <div class="d">Where clipped jobs land. “Applied” bumps your RUNWAY activity streak.</div>
+        <label class="mono">Stage</label>
+        <select id="defaultStage"><option value="wishlist">Wishlist</option><option value="applied">Applied</option></select>
+      </div>
+
+      <div class="sec">
+        <h3>Auto-sync</h3>
+        <div class="d">Push queued clips automatically whenever a RUNWAY tab is open.</div>
+        <div class="trow"><label class="sw"><input type="checkbox" id="autoSync" checked /><span class="tk"></span></label><span id="autoL" class="mono">Enabled</span></div>
+      </div>
+
+      <div class="sec">
+        <h3>Company blocklist</h3>
+        <div class="d">Comma-separated. Postings whose company contains any of these are skipped when clipping.</div>
+        <label class="mono">Blocklist</label>
+        <textarea id="blocklist" placeholder="staffing, consultancy inc, recruiters llc"></textarea>
+      </div>
+
+      <div class="sec">
+        <h3>Theme</h3>
+        <div class="d">Also toggle instantly from the popup (◐).</div>
+        <div class="themes" id="themes">
+          <div class="tcard" data-t="noir"><div class="tsw" style="background:linear-gradient(120deg,#0b0b0c 60%,#c6f24e)"></div><div class="n">Noir</div></div>
+          <div class="tcard" data-t="bone"><div class="tsw" style="background:linear-gradient(120deg,#efece4 60%,#4b7f00)"></div><div class="n">Bone</div></div>
+        </div>
+      </div>
+
+      <div class="bar">
+        <button class="btn fill" id="save">Save</button>
+        <button class="btn" id="reset">Reset</button>
+        <span class="saved" id="saved">Saved ✓</span>
+      </div>
+    </div>
+    <script src="engine.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>
