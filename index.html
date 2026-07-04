@@ -2778,6 +2778,27 @@
       .ob-btn-ghost:hover { border-color:var(--accent); color:var(--accent); background:rgba(198,242,78,.08); }
       .ob-btn-skip { background:none; border:none; font-size:13px; color:var(--ink-2); cursor:pointer; transition:color .2s; padding:0; font-family:inherit; }
       .ob-btn-skip:hover { color:var(--ink-2); text-decoration:underline; }
+      /* ── Onboarding: browser-clipper step ── */
+      .ob-ext-card { position:relative; overflow:hidden; border:1px solid rgba(198,242,78,.28); border-radius:16px; padding:18px; margin-bottom:16px; background:linear-gradient(160deg, rgba(198,242,78,.07), rgba(255,255,255,.02)); animation:obFeatIn .5s var(--ease-out,ease) both; }
+      .ob-ext-glow { position:absolute; width:220px; height:220px; right:-70px; top:-90px; background:radial-gradient(circle, rgba(198,242,78,.22), transparent 70%); pointer-events:none; animation:obExtFloat 9s ease-in-out infinite; }
+      @keyframes obExtFloat { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-18px,20px)} }
+      .ob-ext-head { position:relative; display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+      .ob-ext-mark { width:42px; height:42px; border-radius:12px; display:grid; place-items:center; color:#0b0b0c; background:#c6f24e; box-shadow:0 8px 20px -6px rgba(198,242,78,.6); flex:none; }
+      .ob-ext-mark [data-lucide]{ width:20px; height:20px; }
+      .ob-ext-name { font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:16px; color:#fff; }
+      .ob-ext-sub { font-size:11.5px; color:var(--muted); font-family:var(--mono); }
+      .ob-ext-dl { position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; gap:9px; width:100%; padding:14px; border-radius:12px; background:#c6f24e; color:#0b0b0c; font-weight:700; font-size:14px; text-decoration:none; box-shadow:0 10px 26px -8px rgba(198,242,78,.5); transition:transform .2s var(--ease-spring,cubic-bezier(.34,1.4,.34,1)); animation:obDlPulse 2.4s ease-in-out infinite; }
+      .ob-ext-dl [data-lucide]{ width:18px; height:18px; }
+      .ob-ext-dl:hover { transform:translateY(-2px); }
+      @keyframes obDlPulse { 0%,100%{box-shadow:0 10px 26px -8px rgba(198,242,78,.5)} 50%{box-shadow:0 12px 36px -6px rgba(198,242,78,.85)} }
+      .ob-ext-dl::after { content:""; position:absolute; top:0; left:-130%; width:55%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent); transform:skewX(-18deg); animation:obExtShine 3.4s ease-in-out infinite; }
+      @keyframes obExtShine { 0%{left:-130%} 55%,100%{left:170%} }
+      .ob-ext-src { display:block; text-align:center; margin-top:11px; font-size:12px; color:var(--muted); text-decoration:none; }
+      .ob-ext-src:hover { color:var(--accent); }
+      .ob-ext-src [data-lucide]{ width:12px; height:12px; vertical-align:-1px; }
+      .ob-info-step code, .ob-ext-card code, .ob-privacy code { font-family:var(--mono); font-size:.85em; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.14); padding:1px 6px; border-radius:5px; color:#eaffb0; }
+      .ob-ext-step { animation:obFeatIn .5s var(--ease-out,ease) both; }
+      .ob-ext-step:nth-child(2){animation-delay:.08s} .ob-ext-step:nth-child(3){animation-delay:.14s} .ob-ext-step:nth-child(4){animation-delay:.2s} .ob-ext-step:nth-child(5){animation-delay:.26s} .ob-ext-step:nth-child(6){animation-delay:.32s}
       .ob-nav-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:auto; padding-top:24px; }
       .ob-privacy { margin-top:18px; display:flex; align-items:flex-start; gap:11px; padding:14px 16px; background:rgba(255,255,255,.03); border:1px solid var(--glass-border); border-radius:12px; }
       .ob-privacy [data-lucide] { width:18px; height:18px; color:var(--green); flex-shrink:0; margin-top:1px; }
@@ -4401,7 +4422,8 @@
             <h3>Claude API Key (for AI features)</h3>
             <div class="muted mt8" style="font-size: 12px">
               The "predict interview questions" and "tailor resume bullets"
-              buttons need an API key. Get it free:
+              buttons need a Claude API key. It's pay-as-you-go — each action
+              costs roughly a cent, and you add a little credit up front:
             </div>
             <ol
               style="
@@ -4421,7 +4443,8 @@
                   >console.anthropic.com/keys</a
                 >
               </li>
-              <li>Sign up (free) or log in</li>
+              <li>Sign up or log in</li>
+              <li>Add a few dollars of credit under <strong>Billing</strong></li>
               <li>Click "Create key"</li>
               <li>Copy the key (starts with sk-ant-...)</li>
               <li>Paste it below</li>
@@ -4589,14 +4612,15 @@
               <div class="ob-step-dot" id="obDot2"><div class="ob-step-num"><span>2</span><i data-lucide="check"></i></div><div class="ob-step-label">AI Key</div></div>
               <div class="ob-step-dot" id="obDot3"><div class="ob-step-num"><span>3</span><i data-lucide="check"></i></div><div class="ob-step-label">Profile</div></div>
               <div class="ob-step-dot" id="obDot4"><div class="ob-step-num"><span>4</span><i data-lucide="check"></i></div><div class="ob-step-label">Résumé</div></div>
-              <div class="ob-step-dot" id="obDot5"><div class="ob-step-num"><span>5</span><i data-lucide="check"></i></div><div class="ob-step-label">Goals</div></div>
+              <div class="ob-step-dot" id="obDot5"><div class="ob-step-num"><span>5</span><i data-lucide="check"></i></div><div class="ob-step-label">Clipper</div></div>
+              <div class="ob-step-dot" id="obDot6"><div class="ob-step-num"><span>6</span><i data-lucide="check"></i></div><div class="ob-step-label">Goals</div></div>
             </div>
 
             <!-- STEP 1: WELCOME -->
             <div class="ob-step ob-active" id="obS1">
               <div class="ob-eyebrow">Welcome to Runway</div>
               <h2 class="ob-step-title">Everything you need to<br>land the offer.</h2>
-              <p class="ob-step-desc">Four tools, one workspace. Set up takes under three minutes and costs nothing to start.</p>
+              <p class="ob-step-desc">Four tools, one workspace. Set up takes under three minutes. The app is free — AI features run on your own Claude API key (pay-as-you-go, about a cent per action).</p>
               <div class="ob-welcome-feats">
                 <div class="ob-welcome-feat"><div class="ob-wf-icon" style="--c:157,180,216"><i data-lucide="kanban"></i></div><div class="ob-welcome-feat-title">Application Tracker</div><div class="ob-welcome-feat-sub">A Kanban board for every stage of your pipeline</div></div>
                 <div class="ob-welcome-feat"><div class="ob-wf-icon" style="--c:87,212,164"><i data-lucide="file-text"></i></div><div class="ob-welcome-feat-title">AI Résumé Tailor</div><div class="ob-welcome-feat-sub">Rewrite bullets to match any job description</div></div>
@@ -4611,12 +4635,12 @@
             <div class="ob-step" id="obS2">
               <div class="ob-eyebrow">Step 2 · AI Engine</div>
               <h2 class="ob-step-title">Connect Claude AI</h2>
-              <p class="ob-step-desc">Runway uses Claude to tailor résumés, write cover letters, and coach interviews. Your key is stored only in your browser — never on a server.</p>
+              <p class="ob-step-desc">Runway uses Claude to tailor résumés, write cover letters, and coach interviews. Your key is stored only in your browser — never on a server. Claude's API is pay-as-you-go — roughly a cent per action, so a few dollars of credit goes a long way.</p>
               <div class="ob-info-box">
-                <div class="ob-info-box-title"><i data-lucide="key-round"></i> Get your free API key</div>
-                <div class="ob-info-step"><div class="ob-info-num">1</div>Visit <strong>console.anthropic.com</strong> and sign up free</div>
-                <div class="ob-info-step"><div class="ob-info-num">2</div>Open <strong>API Keys</strong> → <strong>Create key</strong></div>
-                <div class="ob-info-step"><div class="ob-info-num">3</div>Paste it below to activate AI features</div>
+                <div class="ob-info-box-title"><i data-lucide="key-round"></i> Get your Claude API key</div>
+                <div class="ob-info-step"><div class="ob-info-num">1</div>Visit <strong>console.anthropic.com</strong> and sign up</div>
+                <div class="ob-info-step"><div class="ob-info-num">2</div>Add a little credit under <strong>Billing</strong> (pay-as-you-go)</div>
+                <div class="ob-info-step"><div class="ob-info-num">3</div>Open <strong>API Keys</strong> → <strong>Create key</strong>, paste below</div>
               </div>
               <div class="ob-field" style="margin-bottom:14px">
                 <label>Your Claude API key</label>
@@ -4672,9 +4696,50 @@
               </div>
             </div>
 
-            <!-- STEP 5: GOALS & THEME -->
+            <!-- STEP 5: BROWSER CLIPPER -->
             <div class="ob-step" id="obS5">
-              <div class="ob-eyebrow">Step 5 · Make it yours</div>
+              <div class="ob-eyebrow">Step 5 · Browser clipper</div>
+              <h2 class="ob-step-title">Clip jobs from<br>anywhere.</h2>
+              <p class="ob-step-desc">Install the free <strong>RUNWAY Clip</strong> extension to save jobs from LinkedIn, Indeed &amp; Glassdoor straight into your pipeline — one click, no copy-paste. Totally optional.</p>
+
+              <div class="ob-ext-card">
+                <div class="ob-ext-glow"></div>
+                <div class="ob-ext-head">
+                  <div class="ob-ext-mark"><i data-lucide="scissors"></i></div>
+                  <div>
+                    <div class="ob-ext-name">RUNWAY Clip</div>
+                    <div class="ob-ext-sub">Chrome / Edge · unpacked extension</div>
+                  </div>
+                </div>
+                <a class="ob-ext-dl" href="https://github.com/abhiishekk02/runway/archive/refs/heads/main.zip" download>
+                  <i data-lucide="download"></i> Download extension (.zip)
+                </a>
+                <a class="ob-ext-src" href="https://github.com/abhiishekk02/runway/tree/main/clipper" target="_blank" rel="noopener">or view the source on GitHub <i data-lucide="arrow-up-right"></i></a>
+              </div>
+
+              <div class="ob-info-box" style="margin-top:4px">
+                <div class="ob-info-box-title"><i data-lucide="puzzle"></i> How to install (2 minutes)</div>
+                <div class="ob-info-step ob-ext-step"><div class="ob-info-num">1</div><div><strong>Download</strong> the .zip above and <strong>unzip</strong> it. The extension lives in the <code>clipper</code> folder inside.</div></div>
+                <div class="ob-info-step ob-ext-step"><div class="ob-info-num">2</div><div>Open a new tab and go to <code>chrome://extensions</code></div></div>
+                <div class="ob-info-step ob-ext-step"><div class="ob-info-num">3</div><div>Turn on <strong>Developer mode</strong> (toggle, top-right)</div></div>
+                <div class="ob-info-step ob-ext-step"><div class="ob-info-num">4</div><div>Click <strong>Load unpacked</strong> → select the <code>clipper</code> folder</div></div>
+                <div class="ob-info-step ob-ext-step"><div class="ob-info-num">5</div><div>Pin it, then in the extension's <strong>Settings</strong> paste this app's URL so clips sync back here</div></div>
+              </div>
+
+              <div class="ob-privacy" style="margin-top:16px">
+                <i data-lucide="mouse-pointer-click"></i>
+                <div><strong>Then just clip.</strong> On any job posting, hit the floating <em>Clip</em> button (or the toolbar icon) and it lands in your Wishlist automatically.</div>
+              </div>
+
+              <div class="ob-nav-row">
+                <button class="ob-btn-ghost" onclick="obGoTo(6)">Skip for now</button>
+                <button class="ob-btn-primary" onclick="obGoTo(6)" style="width:auto;padding:14px 26px">I've got it <i data-lucide="arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 6: GOALS & THEME -->
+            <div class="ob-step" id="obS6">
+              <div class="ob-eyebrow">Step 6 · Make it yours</div>
               <h2 class="ob-step-title">Goals &amp; style</h2>
               <p class="ob-step-desc">Set targets to stay motivated and pick a look. Both are changeable anytime.</p>
               <div class="ob-slider-wrap">
@@ -6717,7 +6782,7 @@
         } catch (e) {
           if (!apiKey && !loadApiKey()) {
             $("#aiOut").innerHTML =
-              "\u2699\ufe0f <b>One-time setup:</b> click the gear icon (top-right) \u2192 paste your API key \u2192 Test key.<br><br>Get a free key at console.anthropic.com/keys \u2014 calls cost about a cent each on Haiku.";
+              "\u2699\ufe0f <b>One-time setup:</b> click the gear icon (top-right) \u2192 paste your API key \u2192 Test key.<br><br>Get a key at console.anthropic.com/keys \u2014 pay-as-you-go, about a cent per call on Haiku.";
           } else {
             $("#aiOut").textContent = "\u274c " + e.message;
           }
@@ -11422,7 +11487,7 @@ Anything that could be a dealbreaker.
       }
 
       let obStep = 1;
-      const OB_TOTAL = 5;
+      const OB_TOTAL = 6;
 
       function obGoTo(step) {
         document.querySelectorAll('.ob-step').forEach((el, i) => {
